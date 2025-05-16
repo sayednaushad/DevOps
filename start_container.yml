@@ -5,7 +5,7 @@
     - name: Docker login
       docker_login:
         username: sayednaushadh
-        password: dckr_pat_-yeseFDNH2sCg07k54RbXhjdh54Z3805375
+        password: 123456
 
     - name: Build an image and push it to a private repo
       community.docker.docker_image:
