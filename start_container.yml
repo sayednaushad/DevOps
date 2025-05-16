@@ -1,0 +1,32 @@
+---
+- hosts: webservers
+  gather_facts: false
+  tasks:
+    - name: Docker login
+      docker_login:
+        username: sayednaushadh
+        password: dckr_pat_-yeseFDNH2sCg07k54RbXhjdh54Z3805375
+
+    - name: Build an image and push it to a private repo
+      community.docker.docker_image:
+        build:
+          path: "/opt/docker"
+        name: docker.io/sayednaushadh/abctechnologies
+        push: true
+        source: build
+      register: out
+
+    - debug:
+        var: out
+
+    - name: Start a container
+      community.docker.docker_container:
+        name: abctechnologies
+        image: sayednaushadh/abctechnologies
+        state: started
+        ports:
+          - 8090:8080
+      register: out
+
+    - debug:
+        var: out
